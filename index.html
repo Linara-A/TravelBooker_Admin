@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelBooker Admin — Control Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ LOGIN PAGE ══ -->
+<div id="loginPage">
+  <div class="login-left">
+    <div class="login-left-content">
+      <div class="login-logo">Travel<span>Booker</span></div>
+      <div class="login-tagline">Admin Control Centre</div>
+      <div style="width:100%;max-width:320px">
+        <div class="login-stat">
+          <div class="login-stat-icon"><i class="fas fa-hotel"></i></div>
+          <div class="login-stat-text"><div class="login-stat-num">43</div><div class="login-stat-label">Partner Hotels</div></div>
+        </div>
+        <div class="login-stat">
+          <div class="login-stat-icon"><i class="fas fa-suitcase"></i></div>
+          <div class="login-stat-text"><div class="login-stat-num">1,248</div><div class="login-stat-label">Active Bookings</div></div>
+        </div>
+        <div class="login-stat">
+          <div class="login-stat-icon"><i class="fas fa-users"></i></div>
+          <div class="login-stat-text"><div class="login-stat-num">52,304</div><div class="login-stat-label">Registered Users</div></div>
+        </div>
+        <div class="login-stat">
+          <div class="login-stat-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="login-stat-text"><div class="login-stat-num">$842K</div><div class="login-stat-label">Revenue This Month</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div style="font-family:var(--font-display);font-size:14px;color:var(--gold);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">Admin Portal</div>
+    <h2>Welcome back,<br>Administrator</h2>
+    <p>Sign in to access the TravelBooker control centre.</p>
+    <div class="form-group">
+      <label class="form-label">Admin Email</label>
+      <div class="input-wrap">
+        <i class="fas fa-envelope"></i>
+        <input class="form-input" type="email" placeholder="admin@travelbooker.lk" id="loginEmail" value="admin@travelbooker.lk">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <div class="input-wrap">
+        <i class="fas fa-lock"></i>
+        <input class="form-input" type="password" placeholder="••••••••••" id="loginPassword" value="Admin@2026">
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+        <input type="checkbox" checked style="accent-color:var(--deep-teal)"> Remember me
+      </label>
+      <a style="font-size:13px;color:var(--deep-teal);cursor:pointer;font-weight:600">Forgot password?</a>
+    </div>
+    <button class="btn-login" onclick="doLogin()"><i class="fas fa-sign-in-alt" style="margin-right:8px"></i>Sign In to Admin Panel</button>
+    <div class="login-badge">
+      <i class="fas fa-shield-alt"></i>
+      <span>Protected by 2FA. Admin access is logged and monitored.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ ADMIN APP ══ -->
+<div id="adminApp">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">Travel<span>Booker</span></div>
+      <div class="sidebar-admin-tag">Admin Panel</div>
+    </div>
+
+    <div class="sidebar-section">Main</div>
+    <div class="nav-item active" onclick="showSection('dashboard',this)"><i class="fas fa-th-large"></i> Dashboard</div>
+    <div class="nav-item" onclick="showSection('bookings',this)"><i class="fas fa-suitcase"></i> Bookings <span class="nav-badge">12</span></div>
+    <div class="nav-item" onclick="showSection('users',this)"><i class="fas fa-users"></i> Users</div>
+    <div class="nav-item" onclick="showSection('pending',this)"><i class="fas fa-user-check"></i> Pending Approvals <span class="nav-badge">7</span></div>
+
+    <div class="sidebar-section">Content</div>
+    <div class="nav-item" onclick="showSection('packages',this)"><i class="fas fa-box-open"></i> Tour Packages</div>
+    <div class="nav-item" onclick="showSection('promos',this)"><i class="fas fa-tag"></i> Promo Codes</div>
+
+    <div class="sidebar-section">Support</div>
+    <div class="nav-item" onclick="showSection('inquiries',this)"><i class="fas fa-headset"></i> Inquiries <span class="nav-badge">5</span></div>
+
+    <div class="sidebar-section">Analytics</div>
+    <div class="nav-item" onclick="showSection('analytics',this)"><i class="fas fa-chart-bar"></i> Analytics</div>
+    <div class="nav-item" onclick="showSection('reports',this)"><i class="fas fa-file-invoice-dollar"></i> Revenue Reports</div>
+
+    <div class="sidebar-bottom">
+      <div class="admin-profile">
+        <div class="admin-avatar">SA</div>
+        <div>
+          <div class="admin-name">Super Admin</div>
+          <div class="admin-role">admin@travelbooker.lk</div>
+        </div>
+        <i class="fas fa-sign-out-alt" style="margin-left:auto;color:rgba(255,255,255,.3);cursor:pointer;font-size:15px" onclick="doLogout()" title="Sign Out"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-content">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-right">
+        <div class="topbar-date" id="topbarDate"></div>
+        <div class="topbar-btn" onclick="showSection('inquiries',null)">
+          <i class="fas fa-bell"></i>
+          <div class="topbar-notif-dot"></div>
+        </div>
+        <div class="topbar-btn"><i class="fas fa-cog"></i></div>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ═══════════════ DASHBOARD ═══════════════ -->
+      <div class="page-section active" id="sec-dashboard">
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Total Bookings</div>
+              <div class="kpi-value">1,248</div>
+              <div class="kpi-change up"><i class="fas fa-arrow-up"></i> +14.2% vs last month</div>
+            </div>
+            <div class="kpi-icon" style="background:#DCFCE7;color:#16A34A"><i class="fas fa-suitcase"></i></div>
+          </div>
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Monthly Revenue</div>
+              <div class="kpi-value">$842K</div>
+              <div class="kpi-change up"><i class="fas fa-arrow-up"></i> +9.8% vs last month</div>
+            </div>
+            <div class="kpi-icon" style="background:#FEF9C3;color:#854D0E"><i class="fas fa-dollar-sign"></i></div>
+          </div>
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Active Users</div>
+              <div class="kpi-value">52,304</div>
+              <div class="kpi-change up"><i class="fas fa-arrow-up"></i> +6.1% vs last month</div>
+            </div>
+            <div class="kpi-icon" style="background:#DBEAFE;color:#1D4ED8"><i class="fas fa-users"></i></div>
+          </div>
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-label">Occupancy Rate</div>
+              <div class="kpi-value">78%</div>
+              <div class="kpi-change down"><i class="fas fa-arrow-down"></i> -2.3% vs last month</div>
+            </div>
+            <div class="kpi-icon" style="background:#FCE7F3;color:#BE185D"><i class="fas fa-hotel"></i></div>
+          </div>
+        </div>
+
+        <!-- Charts row -->
+        <div class="charts-row">
+          <div class="card">
+            <div class="card-title">Bookings Overview</div>
+            <div class="card-subtitle">Monthly booking volume — 2026</div>
+            <div class="bar-chart" id="barChart"></div>
+            <div style="display:flex;gap:20px;margin-top:14px">
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-mid)"><div style="width:12px;height:12px;border-radius:3px;background:var(--deep-teal)"></div> Confirmed</div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-mid)"><div style="width:12px;height:12px;border-radius:3px;background:var(--gold)"></div> Pending</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">User Types</div>
+            <div class="card-subtitle">Distribution of active accounts</div>
+            <div class="donut-wrap">
+              <svg viewBox="0 0 120 120" width="140" height="140">
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#F1F5F9" stroke-width="18"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#0B6E4F" stroke-width="18" stroke-dasharray="145 144" stroke-dashoffset="0" stroke-linecap="round"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#C9A84C" stroke-width="18" stroke-dasharray="72 217" stroke-dashoffset="-145" stroke-linecap="round"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#E05A40" stroke-width="18" stroke-dasharray="51 238" stroke-dashoffset="-217" stroke-linecap="round"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#3B82F6" stroke-width="18" stroke-dasharray="21 268" stroke-dashoffset="-268" stroke-linecap="round"/>
+              </svg>
+              <div class="donut-center">
+                <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text-dark)">52K</div>
+                <div style="font-size:10px;color:var(--text-light)">Users</div>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#0B6E4F"></div><span style="flex:1">Direct Customer</span><strong>50%</strong></div>
+              <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#C9A84C"></div><span style="flex:1">Travel Agent</span><strong>25%</strong></div>
+              <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#E05A40"></div><span style="flex:1">Corporate Partner</span><strong>18%</strong></div>
+              <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#3B82F6"></div><span style="flex:1">Honeymooner</span><strong>7%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent bookings + activity -->
+        <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:20px">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+              <div>
+                <div class="card-title">Recent Bookings</div>
+                <div class="card-subtitle" style="margin-bottom:0">Latest 5 reservations</div>
+              </div>
+              <button class="btn-sm btn-outline" onclick="showSection('bookings',document.querySelector('[onclick*=bookings]'))">View All</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Ref</th><th>Guest</th><th>Hotel</th><th>Status</th><th>Total</th></tr></thead>
+                <tbody>
+                  <tr><td><code style="font-size:12px;color:var(--deep-teal)">TB-2026-04821</code></td><td>Charlotte W.</td><td>Amanwella Tangalle</td><td><span class="status-badge status-confirmed">Confirmed</span></td><td>$2,550</td></tr>
+                  <tr><td><code style="font-size:12px;color:var(--deep-teal)">TB-2026-04820</code></td><td>Rajiv Mehta</td><td>Cinnamon Grand</td><td><span class="status-badge status-pending">Pending</span></td><td>$840</td></tr>
+                  <tr><td><code style="font-size:12px;color:var(--deep-teal)">TB-2026-04819</code></td><td>Emma Taylor</td><td>Kahanda Kanda</td><td><span class="status-badge status-confirmed">Confirmed</span></td><td>$1,740</td></tr>
+                  <tr><td><code style="font-size:12px;color:var(--deep-teal)">TB-2026-04818</code></td><td>Stefan M.</td><td>Ella Jungle Resort</td><td><span class="status-badge status-processing">Processing</span></td><td>$435</td></tr>
+                  <tr><td><code style="font-size:12px;color:var(--deep-teal)">TB-2026-04817</code></td><td>Fathima I.</td><td>Santani Wellness</td><td><span class="status-badge status-confirmed">Confirmed</span></td><td>$1,260</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Recent Activity</div>
+            <div class="card-subtitle">System events</div>
+            <div id="activityFeed"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ BOOKINGS ════════════════ -->
+      <div class="page-section" id="sec-bookings">
+        <div class="page-header">
+          <div><div class="page-title">All <span>Bookings</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Manage and monitor all customer reservations</div></div>
+          <div class="page-actions">
+            <div class="search-bar"><i class="fas fa-search"></i><input placeholder="Search by ref, guest or hotel…"></div>
+            <button class="btn-sm btn-primary" onclick="openModal('exportModal')"><i class="fas fa-download" style="margin-right:6px"></i>Export</button>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-tab active" onclick="setFilter(this)">All (1,248)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Confirmed (894)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Pending (212)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Cancelled (84)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Processing (58)</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Ref</th><th>Guest</th><th>Type</th><th>Hotel</th><th>Dates</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="bookingsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ USERS ═════════════════ -->
+      <div class="page-section" id="sec-users">
+        <div class="page-header">
+          <div><div class="page-title">User <span>Management</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">View, register, and manage all platform accounts</div></div>
+          <div class="page-actions">
+            <div class="search-bar"><i class="fas fa-search"></i><input placeholder="Search by name, email or type…"></div>
+            <button class="btn-sm btn-primary" onclick="openModal('addUserModal')"><i class="fas fa-user-plus" style="margin-right:6px"></i>Register User</button>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-tab active" onclick="setFilter(this)">All Users (52,304)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Direct Customers (26,152)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Travel Agents (13,076)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Corporate Partners (9,382)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Honeymooners (3,694)</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>User</th><th>Email</th><th>Type</th><th>Joined</th><th>Bookings</th><th>Loyalty Pts</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="usersTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ PENDING APPROVALS ════════════════ -->
+      <div class="page-section" id="sec-pending">
+        <div class="page-header">
+          <div><div class="page-title">Pending <span>Approvals</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Approve or reject B2C and B2B login requests</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:#DCFCE7;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#15803D;font-size:16px"><i class="fas fa-user-check"></i></div>
+              <div><div class="card-title" style="margin-bottom:0">B2C Approvals</div><div style="font-size:12px;color:var(--text-light)">Direct customer registration requests</div></div>
+            </div>
+            <div id="b2cApprovals"></div>
+          </div>
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <div style="width:36px;height:36px;background:#DBEAFE;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#1D4ED8;font-size:16px"><i class="fas fa-building"></i></div>
+              <div><div class="card-title" style="margin-bottom:0">B2B Approvals</div><div style="font-size:12px;color:var(--text-light)">Corporate partner & travel agent requests</div></div>
+            </div>
+            <div id="b2bApprovals"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ PACKAGES ═══════════════ -->
+      <div class="page-section" id="sec-packages">
+        <div class="page-header">
+          <div><div class="page-title">Tour Package <span>Management</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Create, edit, publish and remove tour packages</div></div>
+          <div class="page-actions">
+            <button class="btn-sm btn-primary" onclick="openModal('newPackageModal')"><i class="fas fa-plus" style="margin-right:6px"></i>New Package</button>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-tab active" onclick="setFilter(this)">All (8)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Published (5)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Draft (3)</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Package Name</th><th>Type</th><th>Duration</th><th>Price</th><th>Bookings</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="packagesTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ PROMO CODES ════════════ -->
+      <div class="page-section" id="sec-promos">
+        <div class="page-header">
+          <div><div class="page-title">Promotional <span>Codes</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Manage discount codes and marketing campaigns</div></div>
+          <div class="page-actions">
+            <button class="btn-sm btn-primary" onclick="openModal('newPromoModal')"><i class="fas fa-plus" style="margin-right:6px"></i>New Promo Code</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Code</th><th>Discount</th><th>Type</th><th>Uses</th><th>Max Uses</th><th>Expires</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="promosTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ INQUIRIES ════════════ -->
+      <div class="page-section" id="sec-inquiries">
+        <div class="page-header">
+          <div><div class="page-title">Customer <span>Inquiries</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Respond to customer and agent support requests</div></div>
+          <div class="page-actions">
+            <div class="search-bar"><i class="fas fa-search"></i><input placeholder="Search inquiries…"></div>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-tab active" onclick="setFilter(this)">All (24)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Open (5)</button>
+          <button class="filter-tab" onclick="setFilter(this)">In Progress (8)</button>
+          <button class="filter-tab" onclick="setFilter(this)">Resolved (11)</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Ticket</th><th>From</th><th>Subject</th><th>Type</th><th>Received</th><th>Priority</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="inquiriesTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ ANALYTICS ════════════ -->
+      <div class="page-section" id="sec-analytics">
+        <div class="page-header">
+          <div><div class="page-title">Booking <span>Analytics</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Booking trends, customer engagement and platform performance</div></div>
+          <div class="page-actions">
+            <select class="btn-sm" style="padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-body);background:white">
+              <option>Last 30 days</option><option>Last 90 days</option><option>This year</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px">
+          <div class="kpi-card"><div><div class="kpi-label">Avg Booking Value</div><div class="kpi-value">$684</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +11% this month</div></div><div class="kpi-icon" style="background:#DCFCE7;color:#16A34A"><i class="fas fa-receipt"></i></div></div>
+          <div class="kpi-card"><div><div class="kpi-label">Cancellation Rate</div><div class="kpi-value">6.7%</div><div class="kpi-change down"><i class="fas fa-arrow-up"></i> +0.4% this month</div></div><div class="kpi-icon" style="background:#FEE2E2;color:#B91C1C"><i class="fas fa-times-circle"></i></div></div>
+          <div class="kpi-card"><div><div class="kpi-label">Repeat Customers</div><div class="kpi-value">38%</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +5% this month</div></div><div class="kpi-icon" style="background:#DBEAFE;color:#1D4ED8"><i class="fas fa-redo"></i></div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="card">
+            <div class="card-title">Top Destinations by Bookings</div>
+            <div class="card-subtitle" style="margin-bottom:18px">This month</div>
+            <div id="destAnalytics"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Customer Engagement</div>
+            <div class="card-subtitle" style="margin-bottom:18px">Platform activity metrics</div>
+            <div id="engagementAnalytics"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ REVENUE REPORTS ═══════════════ -->
+      <div class="page-section" id="sec-reports">
+        <div class="page-header">
+          <div><div class="page-title">Revenue & <span>Occupancy Reports</span></div><div style="font-size:13px;color:var(--text-light);margin-top:4px">Financial performance and hotel occupancy tracking</div></div>
+          <div class="page-actions">
+            <button class="btn-sm btn-primary" onclick="showToast('📊 Report exported as PDF!')"><i class="fas fa-download" style="margin-right:6px"></i>Export Report</button>
+          </div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card"><div><div class="kpi-label">Total Revenue YTD</div><div class="kpi-value">$5.2M</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +22% vs last year</div></div><div class="kpi-icon" style="background:#FEF9C3;color:#854D0E"><i class="fas fa-coins"></i></div></div>
+          <div class="kpi-card"><div><div class="kpi-label">Avg Occupancy Rate</div><div class="kpi-value">76.4%</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +4.2% vs last year</div></div><div class="kpi-icon" style="background:#DCFCE7;color:#16A34A"><i class="fas fa-bed"></i></div></div>
+          <div class="kpi-card"><div><div class="kpi-label">Commission Earned</div><div class="kpi-value">$312K</div><div class="kpi-change up"><i class="fas fa-arrow-up"></i> +18% vs last year</div></div><div class="kpi-icon" style="background:#FCE7F3;color:#BE185D"><i class="fas fa-percentage"></i></div></div>
+          <div class="kpi-card"><div><div class="kpi-label">Refunds Processed</div><div class="kpi-value">$28K</div><div class="kpi-change down"><i class="fas fa-arrow-up"></i> +3% vs last year</div></div><div class="kpi-icon" style="background:#FEE2E2;color:#B91C1C"><i class="fas fa-undo"></i></div></div>
+        </div>
+        <div class="card" style="margin-top:4px">
+          <div class="card-title">Monthly Revenue Breakdown — 2026</div>
+          <div class="card-subtitle" style="margin-bottom:20px">Revenue by booking type</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Month</th><th>Direct Customers</th><th>Travel Agents</th><th>Corporate</th><th>Total</th><th>Occupancy</th><th>vs Target</th></tr></thead>
+              <tbody id="revenueTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- content-area -->
+  </div><!-- main-content -->
+</div><!-- adminApp -->
+
+<!-- ══════════ MODALS ══════════ -->
+<div class="modal-bg" id="addUserModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('addUserModal')"><i class="fas fa-times"></i></button>
+    <h3>Register New User</h3>
+    <p class="sub">Create a new account and assign their access level.</p>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" placeholder="First name"></div>
+      <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" placeholder="Last name"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="user@email.com"></div>
+    <div class="form-group"><label class="form-label">User Type</label>
+      <select class="form-select">
+        <option>Direct Customer / Tourist</option>
+        <option>Travel Agent</option>
+        <option>Corporate Partner</option>
+        <option>Honeymooner / Couple</option>
+        <option>Family Group</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Temporary Password</label><input class="form-input" type="password" placeholder="Min. 8 characters"></div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn-sm btn-primary" style="padding:10px 24px" onclick="closeModal('addUserModal');showToast('✅ User registered successfully!')">Register User</button>
+      <button class="btn-sm btn-outline" style="padding:10px 24px" onclick="closeModal('addUserModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="newPackageModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('newPackageModal')"><i class="fas fa-times"></i></button>
+    <h3>Create New Package</h3>
+    <p class="sub">Add a new tour package to the platform.</p>
+    <div class="form-group"><label class="form-label">Package Name</label><input class="form-input" placeholder="e.g. Southern Coast Escape"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Category</label>
+        <select class="form-select"><option>Direct Customer</option><option>Honeymoon</option><option>Corporate</option><option>Family</option><option>Travel Agent</option><option>Wellness</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Duration</label><input class="form-input" placeholder="e.g. 5 Days / 4 Nights"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Price (USD)</label><input class="form-input" type="number" placeholder="890"></div>
+      <div class="form-group"><label class="form-label">Original Price (USD)</label><input class="form-input" type="number" placeholder="1090"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Destinations</label><input class="form-input" placeholder="e.g. Galle, Mirissa, Weligama"></div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" placeholder="Package description…"></textarea></div>
+    <div class="form-group"><label class="form-label">Status</label>
+      <select class="form-select"><option>Draft</option><option>Published</option></select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn-sm btn-primary" style="padding:10px 24px" onclick="closeModal('newPackageModal');showToast('📦 Package created successfully!')">Create Package</button>
+      <button class="btn-sm btn-gold" style="padding:10px 24px" onclick="closeModal('newPackageModal');showToast('🚀 Package published!')">Create & Publish</button>
+      <button class="btn-sm btn-outline" style="padding:10px 24px" onclick="closeModal('newPackageModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="newPromoModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('newPromoModal')"><i class="fas fa-times"></i></button>
+    <h3>Create Promo Code</h3>
+    <p class="sub">Set up a new promotional discount for customers.</p>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Promo Code</label><input class="form-input" placeholder="e.g. SUMMER30" style="text-transform:uppercase"></div>
+      <div class="form-group"><label class="form-label">Discount %</label><input class="form-input" type="number" placeholder="15" min="1" max="100"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Type</label>
+        <select class="form-select"><option>All Users</option><option>Direct Customer</option><option>Travel Agent</option><option>Corporate</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Max Uses</label><input class="form-input" type="number" placeholder="500"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Expiry Date</label><input class="form-input" type="date"></div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn-sm btn-primary" style="padding:10px 24px" onclick="closeModal('newPromoModal');showToast('🏷 Promo code created!')">Create Code</button>
+      <button class="btn-sm btn-outline" style="padding:10px 24px" onclick="closeModal('newPromoModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="exportModal">
+  <div class="modal" style="max-width:380px">
+    <button class="modal-close" onclick="closeModal('exportModal')"><i class="fas fa-times"></i></button>
+    <h3>Export Bookings</h3>
+    <p class="sub">Choose your export format and date range.</p>
+    <div class="form-group"><label class="form-label">Date Range</label>
+      <select class="form-select"><option>Last 30 days</option><option>Last 90 days</option><option>This year</option><option>All time</option></select>
+    </div>
+    <div class="form-group"><label class="form-label">Format</label>
+      <select class="form-select"><option>CSV</option><option>Excel (XLSX)</option><option>PDF Report</option></select>
+    </div>
+    <button class="btn-sm btn-primary" style="padding:10px 24px;width:100%;margin-top:8px" onclick="closeModal('exportModal');showToast('📥 Export started — file will download shortly.')">Export</button>
+  </div>
+</div>
+
+<div class="modal-bg" id="replyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('replyModal')"><i class="fas fa-times"></i></button>
+    <h3>Reply to Inquiry</h3>
+    <p class="sub" id="replySubject">Subject: —</p>
+    <div class="form-group"><label class="form-label">Your Response</label><textarea class="form-textarea" id="replyText" placeholder="Type your response to the customer…" style="min-height:120px"></textarea></div>
+    <div class="form-group"><label class="form-label">Update Status</label>
+      <select class="form-select"><option>In Progress</option><option>Resolved</option><option>Escalated</option></select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn-sm btn-primary" style="padding:10px 24px" onclick="closeModal('replyModal');showToast('✉️ Reply sent to customer!')">Send Reply</button>
+      <button class="btn-sm btn-outline" style="padding:10px 24px" onclick="closeModal('replyModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" style="position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:white;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:500;z-index:9999;transition:transform .3s;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.2)"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
